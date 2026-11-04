@@ -15,6 +15,7 @@ import { StudentFinancialSummary } from "./student-financial-summary";
 import { StudentProgramCard } from "./student-program-card";
 import { BalanceCard } from "./balance-card";
 import { StudentSessionsSection } from "./student-sessions-section";
+import { StudentGradesSection } from "@/features/grades/components/student-grades-section";
 import { useStudentSessions } from "../hooks/use-student-sessions";
 
 export function StudentDetailView() {
@@ -49,12 +50,14 @@ export function StudentDetailView() {
     );
   }
 
-  return (
-    <StudentDetailContent student={student} />
-  );
+  return <StudentDetailContent student={student} />;
 }
 
-function StudentDetailContent({ student }: { student: NonNullable<ReturnType<typeof useStudent>["student"]> }) {
+function StudentDetailContent({
+  student,
+}: {
+  student: NonNullable<ReturnType<typeof useStudent>["student"]>;
+}) {
   const { balance } = useStudentSessions(student.id);
 
   return (
@@ -71,6 +74,8 @@ function StudentDetailContent({ student }: { student: NonNullable<ReturnType<typ
       <StudentProgramCard student={student} />
 
       <StudentSessionsSection student={student} />
+      
+      <StudentGradesSection student={student} />
     </div>
   );
 }
